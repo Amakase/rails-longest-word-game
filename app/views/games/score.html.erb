@@ -1,0 +1,13 @@
+<div class="container">
+<h1>Result</h1>
+<p>
+  <% if !@valid %>
+    Sorry but <strong><%= @guess %></strong> can't be built out of <%= @letters.join(", ") %>
+  <% elsif JSON.parse(URI.parse(@url).read)["found"] %>
+    <strong>Congratulations!</strong> <%= @guess %> is a valid English word!
+  <% else %>
+    Sorry but <strong><%= @guess %></strong> does not seem to be a valid English word...
+  <% end %>
+</p>
+<%= link_to "Play again", new_path %>
+<div>
