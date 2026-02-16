@@ -1,13 +1,23 @@
 <div class="container">
-<h1>Result</h1>
-<p>
-  <% if !@valid %>
-    Sorry but <strong><%= @guess %></strong> can't be built out of <%= @letters.join(", ") %>
-  <% elsif JSON.parse(URI.parse(@url).read)["found"] %>
-    <strong>Congratulations!</strong> <%= @guess %> is a valid English word!
+  <h1>Result</h1>
+  <p>
+    <% if !@valid %>
+      Sorry but <strong><%= @guess %></strong> can't be built out of <%= @letters.join(", ") %>.<br />
+      Your score has been reset.
+      <% session[:score] = 0 %>
+    <% elsif JSON.parse(URI.parse(@url).read)["found"] %>
+      <strong>Congratulations!</strong> <%= @guess %> is a valid English word!
+      <% session[:score] += @guess.length %>
+    <% else %>
+      Sorry but <strong><%= @guess %></strong> does not seem to be a valid English word...<br />
+      Your score has been reset.
+      <% session[:score] = 0 %>
+    <% end %>
+  </p>
+  <% if session[:score] == 0 %>
+    <p> Final Score: <%= @score %></p>
   <% else %>
-    Sorry but <strong><%= @guess %></strong> does not seem to be a valid English word...
+    <p> Total Score: <%= session[:score] %></p>
   <% end %>
-</p>
-<%= link_to "Play again", new_path %>
-<div>
+  <%= link_to "Play again", new_path %>
+</div>
