@@ -1,6 +1,6 @@
 # Longest Word Game
 
-A simple game built with Ruby on Rails where you try to make the longest work possible with the given letters
+A simple game built with Ruby on Rails where you try to make the longest word possible with the given letters
 
 ## Getting Started
 ### Setup
